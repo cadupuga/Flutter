@@ -60,9 +60,9 @@ class ContactHelper {
         where: '$idColumn = ?',
         whereArgs: [id]);
 
-    if (maps.length > 0) {
+    //if (maps.length > 0) {
       return Contact.fromMap(maps.first);
-    }
+    //}
   }
 
   Future<int> deleteContact(int id) async {
@@ -70,6 +70,13 @@ class ContactHelper {
 
     return await dbContact
         .delete(contactTable, where: '$idColumn = ?', whereArgs: [id]);
+  }
+
+  Future<int> deleteALLContact() async {
+    final Database dbContact = await db;
+
+    return await dbContact
+        .delete(contactTable, where: '1 = ?', whereArgs: [1]);
   }
 
   Future<int> updateContact(Contact contact) async {
